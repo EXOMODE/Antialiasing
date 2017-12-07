@@ -1,14 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetFrameworks>net35;netstandard2.0;netcoreapp2.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Authors>Yuriy Esin</Authors>
-    <Company>Escorp Technologies</Company>
-    <Description>Library for working with images (detecting bluring/aliasing, resizing without pixelate, etc)</Description>
-    <Copyright>Escorp Technologies (c) 2016-2017</Copyright>
+    <Company>Escorp Dynamics</Company>
+    <Description>Working with images (detecting bluring/aliasing, resizing without pixelate, etc).</Description>
+    <Copyright>Escorp Dynamics (c) 2017</Copyright>
     <PackageTags>antialias, escorp, bitmap, blur, resize, unsafe, image</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseUrl>https://github.com/Exomode/Antialiasing/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Exomode/Antialiasing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Exomode/Antialiasing</RepositoryUrl>
+    <PackageIconUrl>https://image.ibb.co/cwjuSw/Logo_Orange.png</PackageIconUrl>
+    <PackageReleaseNotes>Added supporting for .NET Framework 3.5, .NET Core 2.0 and .NET Standard 2.0.</PackageReleaseNotes>
+    <Version>1.0.0-rc</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -19,8 +26,24 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
+  <ItemGroup Condition="'$(TargetFramework)' == 'net35'">
+    <Reference Include="System.ServiceProcess" />
   </ItemGroup>
+  
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.5.0-preview1-25914-04</Version>
+    </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.0'">
+    <PackageReference Include="System.Drawing.Common">
+      <Version>4.5.0-preview1-25914-04</Version>
+    </PackageReference>
+  </ItemGroup>
+  
+  <!--<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="CoreCompat.System.Drawing" Version="1.0.0-beta006" />
+  </ItemGroup>-->
 
 </Project>
